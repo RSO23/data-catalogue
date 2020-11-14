@@ -17,3 +17,18 @@ jobs:
           java-version: 11
       - name: Build & Test with Maven
         run: mvn -B test --file pom.xml
+      - name: Package with Maven
+        run: mvn -DIS_PROD=true package -B --file pom.xml
+      - name: Build a Docker image
+        run: |
+          mkdir target/dependency
+          (cd target/dependency; jar -xf ../*.jar)
+          docker build . -t rso23.azurecr.io/data-catalogue:latest
+      - name: Login to Azure
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Push docker image to Azure
+        run: docker push rso23.azurecr.io/data-catalogue:latest
