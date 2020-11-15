@@ -16,7 +16,7 @@ spec:
         - image: rso23.azurecr.io/data-catalogue:latest
           name: data-catalogue
           ports:
-            - containerPort: 8083
+            - containerPort: 8081
               name: server
               protocol: TCP
           imagePullPolicy: Always
@@ -30,7 +30,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8083
+    - port: 8081
       protocol: TCP
       targetPort: server
   selector:
