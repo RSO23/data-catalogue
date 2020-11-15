@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-catalogue-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-catalogue
+  template:
+    metadata:
+      labels:
+        app: data-catalogue
+    spec:
+      containers:
+        - image: rso23.azurecr.io/data-catalogue:latest
+          name: data-catalogue
+          ports:
+            - containerPort: 8083
+              name: server
+              protocol: TCP
+          imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-catalogue
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8083
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: data-catalogue
