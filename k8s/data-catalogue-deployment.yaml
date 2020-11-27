@@ -13,7 +13,7 @@ spec:
         app: data-catalogue
     spec:
       containers:
-        - image: rso23.azurecr.io/data-catalogue:latest
+        - image: blarc/rso-data-catalogue:latest
           name: data-catalogue
           ports:
             - containerPort: 8081
@@ -28,7 +28,7 @@ kind: Service
 metadata:
   name: data-catalogue
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8081
       protocol: TCP
