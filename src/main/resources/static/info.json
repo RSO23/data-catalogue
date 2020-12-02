@@ -1,8 +1,8 @@
 {
   "clani": ["jm6421", "mb0964"],
   "opis_projekta": "Najin projekt implementira aplikacijo za predikcijo posamezne igre League of Legends.",
-  "mikrostoritve": ["http://35.189.96.118:8081/v1/orders", "http://35.197.209.159:8080/v1/customers/"],
+  "mikrostoritve": ["http://52.146.70.143/prediction/predictions", "http://52.146.70.143/riot-api/championRates2"],
   "github": ["https://github.com/RSO23/prediction", "https://github.com/RSO23/data-catalogue", "https://github.com/RSO23/riot-api"],
   "travis": ["https://github.com/RSO23/prediction/actions", "https://github.com/RSO23/data-catalogue/actions", "https://github.com/RSO23/riot-api/actions"],
-  "dockerhub": ["https://hub.docker.com/r/jmezna/rso-customers/", "https://hub.docker.com/r/jmezna/rso-orders/"]
+  "dockerhub": ["https://hub.docker.com/repository/docker/blarc/rso-riotapi", "https://hub.docker.com/repository/docker/blarc/rso-prediction", "https://hub.docker.com/repository/docker/blarc/rso-data-catalogue"]
 }
