@@ -2,3 +2,7 @@ server:
   port: ${PORT:8081}
 
 isProd: ${IS_PROD:false}
+
+spring:
+  application:
+    name: data-catalogue
