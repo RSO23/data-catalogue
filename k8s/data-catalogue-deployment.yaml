@@ -13,7 +13,7 @@ spec:
         app: data-catalogue
     spec:
       containers:
-        - image: blarc/rso-data-catalogue:latest
+        - image: blarc/rso-data-catalogue
           name: data-catalogue
           ports:
             - containerPort: 8081

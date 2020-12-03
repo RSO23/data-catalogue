@@ -14,7 +14,7 @@ public class DataCatalogueController
 {
     @GetMapping("/ping")
     public String ping() {
-        return "Pong Pong!";
+        return "Pong!";
     }
 
     @GetMapping("/info")
