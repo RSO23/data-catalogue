@@ -39,7 +39,7 @@ jobs:
       - name: Setup AKS context
         uses: azure/aks-set-context@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS_TEST }}
           resource-group: ${{ secrets.RESOURCE_GROUP_TEST}}
           cluster-name: rso23-test
       - name: Deploy to Kubernetes
