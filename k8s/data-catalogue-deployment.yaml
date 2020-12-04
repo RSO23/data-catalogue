@@ -7,13 +7,17 @@ spec:
   selector:
     matchLabels:
       app: data-catalogue
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
   template:
     metadata:
       labels:
         app: data-catalogue
     spec:
       containers:
-        - image: blarc/rso-data-catalogue
+        - image: blarc/rso-data-catalogue:latest
           name: data-catalogue
           ports:
             - containerPort: 8081
