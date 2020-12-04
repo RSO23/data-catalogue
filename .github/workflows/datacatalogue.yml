@@ -16,9 +16,11 @@ jobs:
         with:
           java-version: 11
       - name: Build & Test with Maven
-        run: mvn -B test --file pom.xml
+        run: |
+          mvn -B test --file pom.xml
       - name: Package with Maven
-        run: mvn -DIS_PROD=true package -B --file pom.xml
+        run: |
+          mvn -DIS_PROD=true package -B --file pom.xml
       - name: Build a Docker image
         run: |
           mkdir target/dependency
@@ -32,3 +34,14 @@ jobs:
       - name: Push docker image to Docker Hub
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/rso-data-catalogue:$(git rev-parse --short "$GITHUB_SHA")
+      - name: Setup Kubectl
+        uses: azure/setup-kubectl@v1
+      - name: Setup AKS context
+        uses: azure/aks-set-context@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+            resource-group: ${{ secrets.RESOURCE_GROUP_TEST}}
+            cluster-name: rso23-test
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl set image deployment/data-catalogue-deployment data-catalogue=blarc/rso-data-catalogue:$(git rev-parse --short "$GITHUB_SHA")
