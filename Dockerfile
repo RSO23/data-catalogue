@@ -4,4 +4,4 @@ ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","rso.datacatalogue.DataCatalogueApplication"]
+ENTRYPOINT ["java","-Dspring.profiles.active=test","-cp","app:app/lib/*","rso.datacatalogue.DataCatalogueApplication"]
