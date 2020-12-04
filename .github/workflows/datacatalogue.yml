@@ -17,7 +17,7 @@ jobs:
           java-version: 11
       - name: Build & Test with Maven
         run: |
-          mvn -P prod -B --file pom.xml
+          mvn -P prod test -B --file pom.xml
       - name: Package with Maven
         run: |
           mvn -P prod package -B --file pom.xml
