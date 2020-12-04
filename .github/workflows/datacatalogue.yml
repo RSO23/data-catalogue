@@ -44,4 +44,4 @@ jobs:
           cluster-name: rso23-test
       - name: Deploy to Kubernetes
         run: |
-          kubectl set image deployment/data-catalogue-deployment data-catalogue=blarc/rso-data-catalogue:$(git rev-parse --short "$GITHUB_SHA")
+          kubectl set image deployment/data-catalogue-deployment data-catalogue=${{ secrets.DOCKERHUB_USERNAME }}/rso-data-catalogue:$(git rev-parse --short "$GITHUB_SHA")
