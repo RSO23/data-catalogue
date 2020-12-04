@@ -8,7 +8,7 @@ spring:
     name: data-catalogue
   cloud:
     consul:
-      host: consul.service.consul
+      host: consul
 
 # Show details of health endpoint
 management:
