@@ -1,9 +1,0 @@
-spring:
-  cloud:
-    consul:
-      host: ${CONSUL_HOST:localhost}
-      discovery:
-        fail-fast: false
-    service-registry:
-      auto-registration:
-        fail-fast: false

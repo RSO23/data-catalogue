@@ -1,8 +1,21 @@
+isProd: ${IS_PROD:false}
+
 server:
   port: ${PORT:8081}
-
-isProd: ${IS_PROD:false}
 
 spring:
   application:
     name: data-catalogue
+
+# Show details of health endpoint
+management:
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    diskspace:
+      enabled: true
+    db:
+      enabled: true
