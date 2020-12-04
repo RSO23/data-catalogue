@@ -17,14 +17,14 @@ jobs:
           java-version: 11
       - name: Build & Test with Maven
         run: |
-          mvn -B test --file pom.xml
+          mvn -DIS_PROD=true -DCONSUL_HOST=consul-consul-server test -B --file pom.xml
       - name: Package with Maven
         run: |
           mvn -DIS_PROD=true -DCONSUL_HOST=consul-consul-server package -B --file pom.xml
       - name: Build a Docker image
         run: |
           mkdir target/dependency
-          (cd target/dependency; jar -DIS_PROD=true -DCONSUL_HOST=consul-consul-server -xf ../*.jar)
+          (cd target/dependency; jar -xf ../*.jar)
           docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/rso-data-catalogue:$(git rev-parse --short "$GITHUB_SHA")
       - name: Login to DockerHub
         uses: docker/login-action@v1
