@@ -23,8 +23,7 @@ jobs:
         run: |
           mkdir target/dependency
           (cd target/dependency; jar -xf ../*.jar)
-          git_hash=$(git rev-parse --short "$GITHUB_SHA")
-          docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/rso-data-catalogue:${{ git_hash }}
+          docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/rso-data-catalogue:$(git rev-parse --short "$GITHUB_SHA")
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
@@ -32,5 +31,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Push docker image to Docker Hub
         run: |
-          git_hash=$(git rev-parse --short "$GITHUB_SHA")
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/rso-data-catalogue:${{ git_hash }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/rso-data-catalogue:$(git rev-parse --short "$GITHUB_SHA")
