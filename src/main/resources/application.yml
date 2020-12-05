@@ -3,6 +3,10 @@ isProd: false
 server:
   port: 8081
 
+spring:
+  application:
+    name: prediction
+
 # Show details of health endpoint
 management:
   endpoint:
