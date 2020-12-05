@@ -9,12 +9,23 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
+import rso.datacatalogue.config.ConfigProperties;
+
 @RestController
+@RequiredArgsConstructor
 public class DataCatalogueController
 {
+    private final ConfigProperties configProperties;
+
     @GetMapping("/ping")
     public String ping() {
         return "Pong pong!";
+    }
+
+    @GetMapping("/config")
+    public String testConfig() {
+        return configProperties.getTestConfig();
     }
 
     @GetMapping("/info")
