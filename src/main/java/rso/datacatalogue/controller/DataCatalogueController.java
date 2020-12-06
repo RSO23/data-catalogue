@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import rso.datacatalogue.config.ConfigProperties;
 @RequiredArgsConstructor
 public class DataCatalogueController
 {
+    private final Logger log = LoggerFactory.getLogger(DataCatalogueController.class);
     private final ConfigProperties configProperties;
 
     @GetMapping("/ping")
@@ -28,7 +31,7 @@ public class DataCatalogueController
         return configProperties.getTestConfig();
     }
 
-    @GetMapping("/info")
+    @GetMapping(value = "/info", produces = "application/json")
     public String info() {
         ClassPathResource resource = new ClassPathResource("/static/info.json");
 
@@ -42,7 +45,7 @@ public class DataCatalogueController
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
         return result;
