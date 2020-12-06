@@ -6,6 +6,13 @@ server:
 spring:
   application:
     name: data-catalogue
+  cloud:
+    circuitbreaker:
+      hystrix:
+        enabled: true
+    loadbalancer:
+      ribbon:
+        enabled: false
 
 # Show details of health endpoint
 management:
