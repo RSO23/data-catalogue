@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: prediction
+    name: data-catalogue
 
 # Show details of health endpoint
 management:

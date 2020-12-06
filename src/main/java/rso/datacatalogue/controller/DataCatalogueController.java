@@ -19,10 +19,12 @@ import rso.datacatalogue.config.ConfigProperties;
 public class DataCatalogueController
 {
     private final Logger log = LoggerFactory.getLogger(DataCatalogueController.class);
+
     private final ConfigProperties configProperties;
 
     @GetMapping("/ping")
     public String ping() {
+        log.info("Ping!");
         return "Pong pong!";
     }
 
