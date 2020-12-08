@@ -37,6 +37,6 @@ spring:
 
 my:
   swagger:
-    prefix: data-catalogue
+    prefix: /data-catalogue
 
 isProd: true
