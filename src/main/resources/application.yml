@@ -10,6 +10,32 @@ my:
 spring:
   application:
     name: data-catalogue
+  datasource:
+    url: jdbc:postgresql://ec2-54-170-100-209.eu-west-1.compute.amazonaws.com:5432/d77219cj169g7e
+    username: zgfppzhhtvttao
+    password: ac6af20e8211130cafd980cd7f78098e7dc85d6a03e46491b73a4f8e2e67d32c
+    driverClassName: org.postgresql.Driver
+    initialize: true
+    initialization-mode: always
+    hikari:
+      connectionTimeout: 200000
+      maximumPoolSize: 10
+      idle-timeout: 300000
+      minimum-idle: 1
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    jpa:
+      repositories:
+        bootstrap_mode: default
   cloud:
     circuitbreaker:
       hystrix:

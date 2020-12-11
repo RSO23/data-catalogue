@@ -3,12 +3,16 @@ package rso.datacatalogue.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import rso.datacatalogue.config.ConfigProperties;
+import rso.datacatalogue.service.DataCatalogueService;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +31,8 @@ public class DataCatalogueController
     private final Logger log = LoggerFactory.getLogger(DataCatalogueController.class);
 
     private final ConfigProperties configProperties;
+
+    private final DataCatalogueService dataCatalogueService;
 
     @GetMapping("/ping")
     public String ping() {
@@ -56,5 +63,26 @@ public class DataCatalogueController
         }
 
         return result;
+    }
+
+    @GetMapping("/testFeign")
+    public String testFeign() {
+        return dataCatalogueService.testFeign();
+    }
+
+    @GetMapping("/test")
+    @Async
+    public String test() {
+        log.info(LocalDateTime.now().toString());
+        CompletableFuture<String> test = dataCatalogueService.test();
+        try
+        {
+            return test.get();
+        }
+        catch (InterruptedException | ExecutionException e)
+        {
+            log.error(e.getLocalizedMessage());
+        }
+        return "Nope!";
     }
 }
