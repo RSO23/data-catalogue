@@ -14,7 +14,7 @@ import rso.datacatalogue.dto.requests.MatchesRegionDto;
 import rso.datacatalogue.dto.requests.UsernameRegionDto;
 import rso.datacatalogue.dto.riotApi.MatchlistDto;
 
-@FeignClient(name = "riot-api", url = "localhost:8082")
+@FeignClient(name = "riot-api")
 public interface RiotApiServiceFeign
 {
     @GetMapping(value = "/ping")
