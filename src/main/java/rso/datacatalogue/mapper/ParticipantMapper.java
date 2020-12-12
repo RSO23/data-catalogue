@@ -13,8 +13,9 @@ public class ParticipantMapper
 
     public static Participant mapToEntity(ParticipantDto participantDto, Match match) {
         Participant participant = new Participant();
-        participant.setUsername(participantDto.getUsername());
+        participant.setMatchId(match.getGameId());
         participant.setAccountId(participantDto.getAccountId());
+        participant.setUsername(participantDto.getUsername());
         participant.setProfileIcon(participantDto.getProfileIcon());
         participant.setChampionId(participantDto.getChampionId());
         participant.setWin(participantDto.isWin());

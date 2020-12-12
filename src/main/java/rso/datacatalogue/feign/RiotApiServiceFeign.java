@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import rso.datacatalogue.dto.orianna.MatchDto;
 import rso.datacatalogue.dto.orianna.SummonerDto;
@@ -24,7 +25,7 @@ public interface RiotApiServiceFeign
     SummonerDto getSummonerByUsername(@RequestBody UsernameRegionDto usernameRegionDto);
 
     @GetMapping("/matches/references/{accountId}")
-    MatchlistDto getMatchReferencesByAccountId(@PathVariable String accountId);
+    MatchlistDto getMatchReferencesByAccountId(@PathVariable String accountId, @RequestParam(required = false) Integer startIndex, @RequestParam(required = false) Integer endIndex);
 
     @PostMapping("/matches")
     List<MatchDto> getMatchesByIds(@RequestBody MatchesRegionDto matchesRegionDto);

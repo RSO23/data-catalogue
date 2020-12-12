@@ -2,6 +2,7 @@ package rso.datacatalogue;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import org.slf4j.MDC;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -40,6 +42,17 @@ public class DataCatalogueApplication {
 	public void contextRefreshEvent(ContextRefreshedEvent contextRefreshedEvent) {
 		ApplicationContext applicationContext = contextRefreshedEvent.getApplicationContext();
 		MDC.put("applicationName", applicationContext.getId());
+	}
+
+	@Bean
+	public Executor taskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(4);
+		executor.setMaxPoolSize(4);
+		executor.setQueueCapacity(500);
+		executor.setThreadNamePrefix("DataCatalogueApi");
+		executor.initialize();
+		return executor;
 	}
 
 	@Bean

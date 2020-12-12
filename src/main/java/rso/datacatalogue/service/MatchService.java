@@ -12,10 +12,13 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import rso.datacatalogue.dto.orianna.MatchDto;
 import rso.datacatalogue.dto.requests.MatchesRegionDto;
 import rso.datacatalogue.dto.riotApi.MatchReferenceDto;
 import rso.datacatalogue.entity.Match;
@@ -32,6 +35,12 @@ public class MatchService
     private final RiotApiServiceFeign riotApiServiceFeign;
 
     private final MatchRepository matchRepository;
+
+    public Page<MatchDto> getPageOfMatchesById(String accountId, Pageable pageable)
+    {
+        return matchRepository.getPageOfMatchesByAccountId(accountId, pageable)
+                .map(MatchMapper::mapToDto);
+    }
 
     @Async
     public void updateMatchesByAccountId(String accountId)
@@ -77,7 +86,7 @@ public class MatchService
     public CompletableFuture<List<MatchReferenceDto>> getMatchReferencesFromApiAsync(String accountId) {
         log.info("getMatchReferencesFromApiAsync called from thread: " + Thread.currentThread().getName());
         return CompletableFuture.completedFuture(
-                Arrays.stream(riotApiServiceFeign.getMatchReferencesByAccountId(accountId).getMatches())
+                Arrays.stream(riotApiServiceFeign.getMatchReferencesByAccountId(accountId, 0, 10).getMatches())
                 .collect(Collectors.toList())
         );
     }

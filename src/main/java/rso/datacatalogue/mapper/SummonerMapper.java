@@ -9,7 +9,7 @@ public class SummonerMapper
         SummonerDto summonerDto = new SummonerDto();
         summonerDto.setId(summoner.getId());
         summonerDto.setAccountId(summoner.getAccountId());
-        summonerDto.setName(summoner.getUsername());
+        summonerDto.setUsername(summoner.getUsername());
         summonerDto.setProfileIconId(summoner.getProfileIconId());
         summonerDto.setPuuid(summoner.getPuuid());
         summonerDto.setSummonerLevel(summoner.getSummonerLevel());
@@ -20,7 +20,7 @@ public class SummonerMapper
         Summoner summoner = new Summoner();
         summoner.setId(summonerDto.getId());
         summoner.setAccountId(summonerDto.getAccountId());
-        summoner.setUsername(summonerDto.getName());
+        summoner.setUsername(summonerDto.getUsername());
         summoner.setProfileIconId(summonerDto.getProfileIconId());
         summoner.setPuuid(summonerDto.getPuuid());
         summoner.setSummonerLevel(summonerDto.getSummonerLevel());
