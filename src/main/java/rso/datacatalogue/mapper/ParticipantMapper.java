@@ -17,7 +17,7 @@ public class ParticipantMapper
         participant.setAccountId(participantDto.getAccountId());
         participant.setUsername(participantDto.getUsername());
         participant.setProfileIcon(participantDto.getProfileIcon());
-        participant.setChampionId(participantDto.getChampionId());
+        participant.setChampion(participantDto.getChampion());
         participant.setWin(participantDto.isWin());
         participant.setKills(participantDto.getKills());
         participant.setDeaths(participantDto.getDeaths());
@@ -32,7 +32,7 @@ public class ParticipantMapper
         participantDto.setUsername(participant.getUsername());
         participantDto.setAccountId(participant.getAccountId());
         participantDto.setProfileIcon(participant.getProfileIcon());
-        participantDto.setChampionId(participant.getChampionId());
+        participantDto.setChampion(participant.getChampion());
         participantDto.setWin(participant.isWin());
         participantDto.setKills(participant.getKills());
         participantDto.setDeaths(participant.getDeaths());

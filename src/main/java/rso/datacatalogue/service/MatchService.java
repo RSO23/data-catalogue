@@ -42,7 +42,6 @@ public class MatchService
                 .map(MatchMapper::mapToDto);
     }
 
-    @Async
     public void updateMatchesByAccountId(String accountId)
     {
         try

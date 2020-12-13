@@ -25,7 +25,7 @@ public class Participant
 
     private int profileIcon;
 
-    private int championId;
+    private String champion;
 
     private boolean win;
 

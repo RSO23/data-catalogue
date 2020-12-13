@@ -8,7 +8,7 @@ public class ParticipantDto
     public String username;
     public String accountId;
     public int profileIcon;
-    public int championId;
+    public String champion;
     public boolean win;
     public int kills;
     public int deaths;
