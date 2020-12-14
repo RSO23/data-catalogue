@@ -48,6 +48,16 @@ spring:
       ribbon:
         enabled: true
 
+feign:
+  httpclient:
+    connection-timeout: 60000
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+
+
 # Show details of health endpoint
 management:
   endpoint:
