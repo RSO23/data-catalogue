@@ -16,13 +16,18 @@ public class ParticipantMapper
         participant.setMatchId(match.getGameId());
         participant.setAccountId(participantDto.getAccountId());
         participant.setUsername(participantDto.getUsername());
-        participant.setProfileIcon(participantDto.getProfileIcon());
+        participant.setProfileIconUrl(participantDto.getProfileIconUrl());
         participant.setChampion(participantDto.getChampion());
+        participant.setChampionIconUrl(participantDto.getChampionIconUrl());
         participant.setWin(participantDto.isWin());
         participant.setKills(participantDto.getKills());
         participant.setDeaths(participantDto.getDeaths());
         participant.setAssists(participantDto.getAssists());
         participant.setLargestMultiKill(participantDto.getLargestMultiKill());
+        participant.setTeamId(participantDto.getTeamId());
+
+
+
         participant.setMatch(match);
         return participant;
     }
@@ -31,13 +36,16 @@ public class ParticipantMapper
         ParticipantDto participantDto = new ParticipantDto();
         participantDto.setUsername(participant.getUsername());
         participantDto.setAccountId(participant.getAccountId());
-        participantDto.setProfileIcon(participant.getProfileIcon());
+        participantDto.setProfileIconUrl(participant.getProfileIconUrl());
         participantDto.setChampion(participant.getChampion());
+        participantDto.setChampionIconUrl(participant.getChampionIconUrl());
         participantDto.setWin(participant.isWin());
         participantDto.setKills(participant.getKills());
         participantDto.setDeaths(participant.getDeaths());
         participantDto.setAssists(participant.getAssists());
         participantDto.setLargestMultiKill(participant.getLargestMultiKill());
+        participantDto.setTeamId(participant.getTeamId());
+
         return participantDto;
     }
 

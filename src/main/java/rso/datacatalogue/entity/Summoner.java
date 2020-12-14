@@ -22,10 +22,20 @@ public class Summoner
 
     private String puuid;
 
-    private Integer profileIconId;
+    private String profileIconUrl;
 
     private Integer summonerLevel;
 
     private Long lastUpdated;
+
+    private String division;
+
+    private String tier;
+
+    private Integer leaguePoints;
+
+    private Integer wins;
+
+    private Integer losses;
 
 }

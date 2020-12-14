@@ -23,9 +23,11 @@ public class Participant
 
     private String username;
 
-    private int profileIcon;
+    private String profileIconUrl;
 
     private String champion;
+
+    private String championIconUrl;
 
     private boolean win;
 
@@ -36,6 +38,8 @@ public class Participant
     private int assists;
 
     private int largestMultiKill;
+
+    private int teamId;
 
     @ManyToOne(targetEntity = Match.class, optional = false)
     private Match match;
