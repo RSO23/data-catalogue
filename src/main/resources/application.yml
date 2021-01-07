@@ -58,6 +58,8 @@ feign:
         readTimeout: 60000
 
 hystrix:
+  dashboard:
+    proxy-stream-allow-list: '*'
   command:
     default:
       execution:
@@ -77,7 +79,10 @@ management:
       enabled: true
     db:
       enabled: true
-
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 ---
 spring:
   profiles: prod
