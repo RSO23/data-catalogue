@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import exceptions.ApiRequestException;
 import lombok.RequiredArgsConstructor;
 import rso.datacatalogue.dto.orianna.SummonerDto;
 import rso.datacatalogue.dto.requests.UsernameRegionDto;
@@ -40,6 +41,12 @@ public class SummonerService
     public Page<SummonerDto> getAllSummoners(Pageable pageable) {
         Page<Summoner> all = summonerRepository.findAll(pageable);
         return all.map(SummonerMapper::mapToDto);
+    }
+
+    public SummonerDto getByUsername(String username) {
+        return summonerRepository.getByUsername(username)
+                .map(SummonerMapper::mapToDto)
+                .orElseThrow(() -> new ApiRequestException("Summoner can't be fetched or found in database!"));
     }
 
     @Async

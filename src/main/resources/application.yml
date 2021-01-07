@@ -57,6 +57,13 @@ feign:
         connectTimeout: 60000
         readTimeout: 60000
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 
 # Show details of health endpoint
 management:

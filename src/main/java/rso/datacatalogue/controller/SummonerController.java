@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import rso.datacatalogue.annotation.ApiPageable;
@@ -31,6 +34,13 @@ public class SummonerController
 
     private final SummonerService summonerService;
 
+    @HystrixCommand(fallbackMethod = "getSummonerByUsernameFallback",
+                    commandProperties = {
+                        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"),
+                        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+                        @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+                        @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")
+                    })
     @GetMapping("/{username}")
     public SummonerDto getSummonerByUsername(@PathVariable("username") String username) {
         log.info("getSummonerByUsername called for username: " + username);
@@ -46,6 +56,11 @@ public class SummonerController
                                              })
                                              @ApiIgnore Pageable pageable) {
         return summonerService.getAllSummoners(pageable);
+    }
+
+    public SummonerDto getSummonerByUsernameFallback(@PathVariable("username") String username) {
+        log.info("getSummonerByUsername called for username: " + username);
+        return summonerService.getByUsername(username);
     }
 
 
